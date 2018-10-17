@@ -132,11 +132,10 @@ public class ScrollViewAdpaterScript : MonoBehaviour
 
 	IEnumerator loadSpriteImageFromUrl(string URL, RawImage imageIcon)
 	{
-		WWW www = new WWW( URL );
+		WWW www = new WWW(URL);
 		yield return www;
 
-		imageIcon.texture = www.texture;
-		www.Dispose();
-		www = null;
+		Texture2D text2d = www.texture;
+		imageIcon.texture = text2d;
 	}
 }

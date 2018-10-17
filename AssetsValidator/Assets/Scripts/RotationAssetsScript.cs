@@ -16,7 +16,7 @@ public class RotationAssetsScript : MonoBehaviour {
 	void Update () {
 		if(Input.GetMouseButton(0))
 			if(startPosition != null)
-				storeTransform.Rotate(Input.GetAxis("Mouse Y")*2, -Input.GetAxis("Mouse X")*2, 0);
+				storeTransform.Rotate(startPosition.transform.rotation.y, -Input.GetAxis("Mouse X")*2, 0);
 	}
 
 	public void resetPosition ()
