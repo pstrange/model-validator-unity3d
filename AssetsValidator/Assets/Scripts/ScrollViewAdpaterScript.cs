@@ -132,7 +132,7 @@ public class ScrollViewAdpaterScript : MonoBehaviour
 
 	IEnumerator loadSpriteImageFromUrl(string URL, Image imageIcon)
 	{
-		WWW www = new WWW("http://res.cloudinary.com/hbru3lefw/image/upload/c_thumb,h_128,w_128/waxqngawysn1cm4grpjd");
+		WWW www = new WWW(URL);
 		while (!www.isDone)
 		{
 			//Debug.Log("Download image on progress" + www.progress);
