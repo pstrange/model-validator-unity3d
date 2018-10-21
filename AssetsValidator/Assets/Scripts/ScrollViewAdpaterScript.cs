@@ -98,13 +98,13 @@ public class ScrollViewAdpaterScript : MonoBehaviour
 	public class ItemView
 	{
 		public Text title;
-		public RawImage imageIcon;
+		public Image imageIcon;
 		public Toggle toggle;
 
 		public ItemView(Transform rootView)
 		{
 			title = rootView.Find("TitleText").GetComponent<Text>();
-			imageIcon = rootView.Find("ImageIcon").GetComponent<RawImage>();
+			imageIcon = rootView.Find("ImageIcon").GetComponent<Image>();
 			toggle = rootView.Find("Toggle").GetComponent<Toggle>();
 		}
 	}
@@ -130,12 +130,30 @@ public class ScrollViewAdpaterScript : MonoBehaviour
 		}
 	}
 
-	IEnumerator loadSpriteImageFromUrl(string URL, RawImage imageIcon)
+	IEnumerator loadSpriteImageFromUrl(string URL, Image imageIcon)
 	{
-		WWW www = new WWW(URL);
-		yield return www;
+		WWW www = new WWW("http://res.cloudinary.com/hbru3lefw/image/upload/c_thumb,h_128,w_128/waxqngawysn1cm4grpjd");
+		while (!www.isDone)
+		{
+			//Debug.Log("Download image on progress" + www.progress);
+			yield return null;
+		}
 
-		Texture2D text2d = www.texture;
-		imageIcon.texture = text2d;
+		if (!string.IsNullOrEmpty(www.error))
+		{
+			Debug.Log("Download failed");
+		}
+		else
+		{
+			Debug.Log("Download succes");
+			Texture2D texture = new Texture2D(128, 128);
+			www.LoadImageIntoTexture (texture);
+
+			Sprite sprite = Sprite.Create(texture,
+				new Rect(0, 0, texture.width, texture.height), 
+				Vector2.one/2);
+
+			imageIcon.sprite = sprite;
+		}
 	}
 }
