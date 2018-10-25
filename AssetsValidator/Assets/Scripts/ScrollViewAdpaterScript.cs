@@ -69,7 +69,7 @@ public class ScrollViewAdpaterScript : MonoBehaviour
 		ItemView view = new ItemView (viewGameObject.transform);
 		view.title.text = model.name;
 		view.toggle.isOn = model.check;
-		StartCoroutine (loadSpriteImageFromUrl (model.url, view.imageIcon));
+		StartCoroutine (loadSpriteImageFromUrl (model.thumb, view.imageIcon));
 		if (!model.check) {
 			view.toggle.onValueChanged.AddListener (delegate {
 				TaskForModelToggle (model, view.toggle);
